@@ -10,6 +10,13 @@ class DoNothing {
         return 'do-nothing';
     }
 
+    equals(other) {
+        if (other === null || other === undefined) return false;
+        if (Object.is(this, other)) return true;
+        if (this.constructor !== other.constructor) return false;
+        return true;
+    }
+
 }
 
 class Assign {
@@ -29,6 +36,13 @@ class Assign {
 
     reducible() {
         return true;
+    }
+
+    equals(other) {
+        if (other === null || other === undefined) return false;
+        if (Object.is(this, other)) return true;
+        if (this.constructor !== other.constructor) return false;
+        return this.name === other.name && this.expression.equals(other.expression);
     }
 
     toString() {
@@ -57,9 +71,17 @@ class If {
         }
     }
 
-
     reducible() {
         return true;
+    }
+
+    equals(other) {
+        if (other === null || other === undefined) return false;
+        if (Object.is(this, other)) return true;
+        if (this.constructor !== other.constructor) return false;
+        return this.condition.equals(other.condition)
+            && this.consequence.equals(other.consequence)
+            && this.alternative.equals(other.alternative);
     }
 
     toString() {

@@ -24,6 +24,13 @@ class Operation {
         return true;
     }
 
+    equals(other) {
+        if (other === null || other === undefined) return false;
+        if (Object.is(this, other)) return true;
+        if (this.constructor !== other.constructor) return false;
+        return this.left.equals(other.left) && this.right.equals(other.right);
+    }
+
 }
 
 class Add extends Operation {
