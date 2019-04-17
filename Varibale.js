@@ -20,7 +20,7 @@ class Varibale {
     }
 
     toString() {
-        return this.name;
+        return `var->${this.name}`;
     }
 
 }
